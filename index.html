@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parabéns, Luana</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Parisienne&family=Playfair+Display:ital,wght@0,400;0,600;1,500&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FBF3EC;
+    --blush:#F3D9DE;
+    --rose:#C97B8C;
+    --wine:#6B2737;
+    --gold:#B08D57;
+    --ink:#3A2129;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Cormorant Garamond', serif;
+    overflow-x:hidden;
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important;}
+  }
+
+  .petal-field{position:fixed; inset:0; pointer-events:none; z-index:5; overflow:hidden;}
+  .petal{
+    position:absolute; top:-5%;
+    width:14px; height:14px;
+    background:var(--rose);
+    opacity:0.55;
+    border-radius:100% 0 100% 0;
+    animation:fall linear infinite, sway ease-in-out infinite;
+  }
+  @keyframes fall{ to{ transform:translateY(110vh); } }
+  @keyframes sway{ 0%,100%{ margin-left:0; } 50%{ margin-left:40px; } }
+
+  .hero{
+    min-height:100svh;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center;
+    position:relative;
+    padding:2rem 1.5rem;
+    background:
+      radial-gradient(circle at 50% 15%, var(--blush) 0%, transparent 55%),
+      linear-gradient(180deg, var(--cream) 0%, #F6E5E1 100%);
+  }
+  .eyebrow{
+    font-family:'Playfair Display', serif;
+    font-style:italic;
+    letter-spacing:0.35em;
+    text-transform:uppercase;
+    font-size:0.72rem;
+    color:var(--rose);
+    margin-bottom:1.4rem;
+  }
+  .hero h1{
+    font-family:'Parisienne', cursive;
+    font-size:clamp(4.5rem, 16vw, 9rem);
+    color:var(--wine);
+    line-height:0.9;
+    text-shadow:0 2px 24px rgba(107,39,55,0.15);
+  }
+  .hero p.tagline{
+    margin-top:1.6rem;
+    font-size:clamp(1.05rem, 2.4vw, 1.35rem);
+    font-style:italic;
+    max-width:36ch;
+    color:#5A3540;
+  }
+  .divider{
+    width:64px; height:1px; background:var(--gold);
+    margin:2.2rem auto; position:relative;
+  }
+  .divider::before{
+    content:'♥';
+    position:absolute; left:50%; top:50%;
+    transform:translate(-50%,-55%);
+    background:var(--cream);
+    color:var(--gold);
+    padding:0 10px;
+    font-size:0.85rem;
+  }
+  .scroll-cue{
+    position:absolute; bottom:2.4rem; left:50%; transform:translateX(-50%);
+    font-size:0.68rem; letter-spacing:0.3em; text-transform:uppercase;
+    color:var(--rose); opacity:0.8;
+    animation:bob 2.4s ease-in-out infinite;
+  }
+  @keyframes bob{ 0%,100%{transform:translate(-50%,0);} 50%{transform:translate(-50%,8px);} }
+
+  section{ position:relative; z-index:2; padding:6rem 1.5rem; }
+  .section-title{
+    font-family:'Playfair Display', serif;
+    font-style:italic;
+    font-weight:500;
+    text-align:center;
+    font-size:clamp(1.8rem, 4vw, 2.6rem);
+    color:var(--wine);
+    max-width:26ch;
+    margin:0 auto 3.5rem;
+  }
+
+  .gallery{
+    max-width:1080px; margin:0 auto;
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(210px, 1fr));
+    gap:2.4rem 2rem;
+    padding-top:1rem;
+  }
+  .polaroid{
+    background:#fff;
+    padding:14px 14px 46px;
+    box-shadow:0 14px 30px -12px rgba(58,33,41,0.35);
+    transition:transform .35s ease, box-shadow .35s ease;
+    cursor:default;
+  }
+  .polaroid:nth-child(odd){ transform:rotate(-3.5deg); }
+  .polaroid:nth-child(even){ transform:rotate(2.8deg); }
+  .polaroid:nth-child(3n){ transform:rotate(-1.5deg); }
+  .polaroid:hover{ transform:rotate(0deg) scale(1.045) translateY(-6px); box-shadow:0 22px 40px -14px rgba(58,33,41,0.45); z-index:3; }
+  .polaroid .frame{
+    display:block;
+    width:100%;
+    aspect-ratio:1/1;
+    object-fit:cover;
+    background:linear-gradient(135deg, var(--blush), #EFC9D1 60%, var(--rose));
+  }
+  .polaroid figcaption{
+    text-align:center; margin-top:0.7rem; color:var(--gold); font-size:1.3rem;
+    line-height:1;
+  }
+
+  .letter-wrap{
+    max-width:640px; margin:0 auto;
+    background:#fffdfb;
+    border:1px solid #EBD8CE;
+    box-shadow:0 20px 50px -20px rgba(58,33,41,0.25);
+    padding:3.4rem 2.6rem;
+    position:relative;
+  }
+  .letter-wrap::before{
+    content:'❝';
+    position:absolute; top:-1.6rem; left:50%; transform:translateX(-50%);
+    font-family:'Playfair Display', serif;
+    font-size:3rem; color:var(--gold); background:var(--cream); padding:0 0.6rem;
+  }
+  .letter-wrap p{
+    font-size:1.18rem; line-height:1.85; margin-bottom:1.2rem; color:#4A2A34;
+  }
+  .letter-wrap .assinatura{
+    font-family:'Parisienne', cursive;
+    font-size:2rem; color:var(--wine); text-align:right; margin-top:1.6rem;
+  }
+
+  .cake-section{ text-align:center; }
+  .cake{
+    width:190px; margin:0 auto 2.6rem;
+    display:flex; flex-direction:column; align-items:center;
+  }
+  .flame-wrap{ position:relative; height:46px; width:10px; margin-bottom:-2px;}
+  .candle{ width:10px; height:44px; background:linear-gradient(180deg,#F7E9D7,#E3C79B); border-radius:2px; position:relative; box-shadow:inset -2px 0 0 rgba(0,0,0,0.06);}
+  .flame{
+    position:absolute; top:-22px; left:50%; transform:translateX(-50%);
+    width:14px; height:22px;
+    background:radial-gradient(circle at 50% 70%, #FFF3C4, #F6B93B 55%, #E3672B 90%);
+    border-radius:60% 60% 60% 60% / 80% 80% 40% 40%;
+    animation:flicker 1.4s ease-in-out infinite;
+    transition:opacity .4s ease, transform .4s ease;
+  }
+  .flame.out{ opacity:0; transform:translateX(-50%) scale(0.2); }
+  @keyframes flicker{
+    0%,100%{ transform:translateX(-50%) rotate(-2deg) scale(1); }
+    50%{ transform:translateX(-50%) rotate(3deg) scale(1.08); }
+  }
+  .tier{ background:linear-gradient(180deg,#F6DDE3,#E7A7B5); border-radius:6px 6px 2px 2px;}
+  .tier.top{ width:110px; height:38px; }
+  .tier.bottom{ width:170px; height:52px; margin-top:4px; }
+  .plate{ width:200px; height:10px; background:var(--gold); border-radius:50%; margin-top:6px; opacity:0.55;}
+
+  .blow-btn{
+    font-family:'Playfair Display', serif; font-style:italic; font-size:1.05rem;
+    background:var(--wine); color:var(--cream);
+    border:none; padding:0.9rem 2.1rem; border-radius:999px;
+    cursor:pointer; letter-spacing:0.02em;
+    box-shadow:0 12px 24px -10px rgba(107,39,55,0.5);
+    transition:transform .25s ease, box-shadow .25s ease;
+  }
+  .blow-btn:hover{ transform:translateY(-2px); box-shadow:0 16px 30px -10px rgba(107,39,55,0.6); }
+  .blow-btn:disabled{ opacity:0.5; cursor:default; transform:none; }
+  .blow-btn:focus-visible, .polaroid:focus-visible { outline:3px solid var(--gold); outline-offset:3px; }
+
+  .wish{
+    margin-top:2rem; max-width:480px; margin-inline:auto;
+    font-family:'Playfair Display', serif; font-style:italic;
+    font-size:1.3rem; color:var(--wine);
+    opacity:0; transform:translateY(10px);
+    transition:opacity .7s ease, transform .7s ease;
+  }
+  .wish.show{ opacity:1; transform:translateY(0); }
+
+  footer{
+    text-align:center; padding:3.5rem 1.5rem 3rem;
+    font-family:'Parisienne', cursive; font-size:1.5rem; color:var(--rose);
+  }
+  footer span{ display:block; font-family:'Cormorant Garamond', serif; font-size:0.8rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--wine); opacity:0.6; margin-top:0.6rem;}
+
+  .lightbox{
+    position:fixed; inset:0; z-index:100;
+    background:rgba(58,33,41,0.92);
+    display:flex; align-items:center; justify-content:center;
+    opacity:0; pointer-events:none; transition:opacity .3s ease;
+    padding:1.5rem;
+  }
+  .lightbox.open{ opacity:1; pointer-events:auto; }
+  .lightbox img{
+    max-width:min(90vw, 720px);
+    max-height:85vh;
+    object-fit:contain;
+    border-radius:4px;
+    box-shadow:0 20px 60px rgba(0,0,0,0.5);
+  }
+  .lightbox-close{
+    position:absolute; top:1.2rem; right:1.5rem;
+    background:none; border:none; color:#fff; font-size:2rem;
+    cursor:pointer; line-height:1; opacity:0.8;
+  }
+  .lightbox-close:hover{ opacity:1; }
+</style>
+</head>
+<body>
+
+<div class="petal-field" id="petalField"></div>
+
+<section class="hero">
+  <p class="eyebrow">Hoje é o teu dia</p>
+  <h1>Luana</h1>
+  <p class="tagline">Um cantinho só nosso, para celebrar tudo o que és.</p>
+  <div class="divider"></div>
+  <span class="scroll-cue">desce para ver ↓</span>
+</section>
+
+<section id="album">
+  <h2 class="section-title">O nosso álbum, à nossa maneira</h2>
+  <div class="gallery">
+    <figure class="polaroid" tabindex="0">
+      <img class="frame" src="images/HPIM2213(1).JPG" alt="Momento especial" loading="lazy">
+      <figcaption>♥</figcaption>
+    </figure>
+    <figure class="polaroid" tabindex="0">
+      <img class="frame" src="images/HPIM2227.JPG" alt="Momento especial" loading="lazy">
+      <figcaption>♥</figcaption>
+    </figure>
+    <figure class="polaroid" tabindex="0">
+      <img class="frame" src="images/HPIM2254.JPG" alt="Momento especial" loading="lazy">
+      <figcaption>♥</figcaption>
+    </figure>
+    <figure class="polaroid" tabindex="0">
+      <img class="frame" src="images/IMG-20241011-WA0035.jpg" alt="Momento especial" loading="lazy">
+      <figcaption>♥</figcaption>
+    </figure>
+    <figure class="polaroid" tabindex="0">
+      <img class="frame" src="images/IMG-20250312-WA0035.jpg" alt="Momento especial" loading="lazy">
+      <figcaption>♥</figcaption>
+    </figure>
+    <figure class="polaroid" tabindex="0">
+      <img class="frame" src="images/IMG-20250329-WA0012.jpg" alt="Momento especial" loading="lazy">
+      <figcaption>♥</figcaption>
+    </figure>
+    <figure class="polaroid" tabindex="0">
+      <img class="frame" src="images/IMG-20250329-WA0014.jpg" alt="Momento especial" loading="lazy">
+      <figcaption>♥</figcaption>
+    </figure>
+    <figure class="polaroid" tabindex="0">
+      <img class="frame" src="images/IMG-20250415-WA0015.jpg" alt="Momento especial" loading="lazy">
+      <figcaption>♥</figcaption>
+    </figure>
+    <figure class="polaroid" tabindex="0">
+      <img class="frame" src="images/IMG-20250430-WA0005.jpg" alt="Momento especial" loading="lazy">
+      <figcaption>♥</figcaption>
+    </figure>
+    <figure class="polaroid" tabindex="0">
+      <img class="frame" src="images/IMG-20250530-WA0000.jpg" alt="Momento especial" loading="lazy">
+      <figcaption>♥</figcaption>
+    </figure>
+    <figure class="polaroid" tabindex="0">
+      <img class="frame" src="images/IMG-20250724-WA0001.jpg" alt="Momento especial" loading="lazy">
+      <figcaption>♥</figcaption>
+    </figure>
+    <figure class="polaroid" tabindex="0">
+      <img class="frame" src="images/IMG-20250805-WA0028.jpg" alt="Momento especial" loading="lazy">
+      <figcaption>♥</figcaption>
+    </figure>
+    <figure class="polaroid" tabindex="0">
+      <img class="frame" src="images/IMG-20250805-WA0033.jpg" alt="Momento especial" loading="lazy">
+      <figcaption>♥</figcaption>
+    </figure>
+    <figure class="polaroid" tabindex="0">
+      <img class="frame" src="images/IMG-20250806-WA0050.jpg" alt="Momento especial" loading="lazy">
+      <figcaption>♥</figcaption>
+    </figure>
+    <figure class="polaroid" tabindex="0">
+      <img class="frame" src="images/IMG-20250917-WA0003.jpg" alt="Momento especial" loading="lazy">
+      <figcaption>♥</figcaption>
+    </figure>
+    <figure class="polaroid" tabindex="0">
+      <img class="frame" src="images/IMG-20260122-WA0005.jpg" alt="Momento especial" loading="lazy">
+      <figcaption>♥</figcaption>
+    </figure>
+    <figure class="polaroid" tabindex="0">
+      <img class="frame" src="images/IMG-20260204-WA0019.jpg" alt="Momento especial" loading="lazy">
+      <figcaption>♥</figcaption>
+    </figure>
+    <figure class="polaroid" tabindex="0">
+      <img class="frame" src="images/IMG-20260227-WA0025.jpg" alt="Momento especial" loading="lazy">
+      <figcaption>♥</figcaption>
+    </figure>
+    <figure class="polaroid" tabindex="0">
+      <img class="frame" src="images/IMG-20260314-WA0008.jpg" alt="Momento especial" loading="lazy">
+      <figcaption>♥</figcaption>
+    </figure>
+    <figure class="polaroid" tabindex="0">
+      <img class="frame" src="images/IMG-20260323-WA0005.jpg" alt="Momento especial" loading="lazy">
+      <figcaption>♥</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section id="carta">
+  <h2 class="section-title">Uma cartinha para ti</h2>
+  <div class="letter-wrap">
+    <p>Luana,</p>
+    <p>
+      Há pessoas que entram na nossa vida como se já tivessem estado lá desde sempre.
+      Tu és uma delas. Com o teu sorriso, a tua luz e a forma como tornas os dias mais leves,
+      fizeste deste cantinho um lugar especial.
+    </p>
+    <p>
+      Hoje celebramos-te — não só pelo dia, mas por tudo o que és.
+      Por cada momento partilhado, por cada gargalhada, por cada silêncio confortável.
+      Este álbum é só um pedacinho de nós, guardado com carinho.
+    </p>
+    <p>
+      Que este ano te traga tudo o que mereces: paz, alegria e muitas razões para sorrir.
+      Obrigado por seres tu.
+    </p>
+    <p class="assinatura">Com amor ♥</p>
+  </div>
+</section>
+
+<section class="cake-section" id="bolo">
+  <h2 class="section-title">Faz um pedido…</h2>
+  <div class="cake">
+    <div class="flame-wrap">
+      <div class="flame" id="flame"></div>
+      <div class="candle"></div>
+    </div>
+    <div class="tier top"></div>
+    <div class="tier bottom"></div>
+    <div class="plate"></div>
+  </div>
+  <button class="blow-btn" id="blowBtn" type="button">Assoprar a vela</button>
+  <p class="wish" id="wish">Que todos os teus sonhos se realizem. Parabéns, Luana! 🎂</p>
+</section>
+
+<footer>
+  Feito com amor, só para ti
+  <span>Luana · 2026</span>
+</footer>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Ampliar foto">
+  <button class="lightbox-close" id="lightboxClose" aria-label="Fechar">&times;</button>
+  <img src="" alt="Foto ampliada" id="lightboxImg">
+</div>
+
+<script>
+  (function(){
+    const field = document.getElementById('petalField');
+    const count = 18;
+    for(let i = 0; i < count; i++){
+      const p = document.createElement('div');
+      p.className = 'petal';
+      p.style.left = Math.random() * 100 + '%';
+      p.style.animationDuration = (8 + Math.random() * 12) + 's, ' + (2 + Math.random() * 3) + 's';
+      p.style.animationDelay = (Math.random() * 8) + 's, 0s';
+      p.style.opacity = 0.25 + Math.random() * 0.4;
+      p.style.width = p.style.height = (10 + Math.random() * 10) + 'px';
+      field.appendChild(p);
+    }
+  })();
+
+  (function(){
+    const btn = document.getElementById('blowBtn');
+    const flame = document.getElementById('flame');
+    const wish = document.getElementById('wish');
+    btn.addEventListener('click', function(){
+      flame.classList.add('out');
+      btn.disabled = true;
+      btn.textContent = 'Pedido feito ♥';
+      wish.classList.add('show');
+    });
+  })();
+
+  (function(){
+    const lb = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lightboxImg');
+    const closeBtn = document.getElementById('lightboxClose');
+
+    document.querySelectorAll('.polaroid img').forEach(img => {
+      img.style.cursor = 'pointer';
+      img.addEventListener('click', () => {
+        lbImg.src = img.src;
+        lb.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+
+    function close(){
+      lb.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    closeBtn.addEventListener('click', close);
+    lb.addEventListener('click', e => { if(e.target === lb) close(); });
+    document.addEventListener('keydown', e => { if(e.key === 'Escape') close(); });
+  })();
+</script>
+</body>
+</html>
